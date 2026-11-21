@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irfan Setiawan | Portfolio</title>
+<style>
+  :root {
+    --bg: #fcf7ef;
+    --surface: #fffbf5;
+    --text: #382c40;
+    --muted: #7d7183;
+    --accent: #8b64bd;
+    --accent-2: #b978b8;
+    --hero-a: #5b3a83;
+    --hero-b: #8a4a86;
+    --border: #e9dfd2;
+    --shadow: 0 10px 30px rgba(92,64,110,.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+    transition: background .3s, color .3s;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: min(1000px, 90%); margin: auto; }
+
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -.5px; }
+  .logo span { color: var(--accent); }
+  .nav-link { color: var(--muted); font-size: .95rem; transition: color .2s; }
+  .nav-link:hover { color: var(--accent); }
+
+  .intro {
+    min-height: 88vh; display: grid; place-items: center;
+    background: radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%);
+  }
+  h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -2px; }
+  .grad {
+    background: linear-gradient(90deg, var(--hero-a), var(--hero-b));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .aka {
+    font-size: 1.05rem; font-weight: 600; margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, var(--hero-a), var(--hero-b), var(--hero-a));
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+  @keyframes shimmer { to { background-position: 200% center; } }
+  .stats { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .stat b { display: block; font-size: 1.8rem; line-height: 1.2; color: var(--hero-a); }
+  .stat span { color: var(--muted); font-size: .85rem; }
+  .btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    padding: .8rem 1.6rem; border-radius: 10px; font-weight: 600; transition: transform .2s, box-shadow .2s;
+  }
+  .btn.primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #fff; }
+  .btn.ghost { border: 1px solid var(--border); }
+  .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+  section { padding: 6rem 0; }
+  .eyebrow { color: var(--accent); font-weight: 700; font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; }
+  h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: .4rem 0 2.5rem; letter-spacing: -1px; }
+  .about { display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
+  .about .stats, .about .btns { justify-content: flex-start; }
+  .about-text { flex: 1 1 300px; }
+  .portrait { width: 180px; height: 180px; border-radius: 16px; object-fit: cover; border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .about p { color: var(--muted); max-width: 700px; font-size: 1.05rem; }
+  .about p + .eyebrow { margin-top: 1.5rem; }
+
+  .chips { display: flex; gap: .8rem; flex-wrap: wrap; }
+  .chip {
+    padding: .55rem 1.1rem; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--surface); font-size: .95rem; transition: transform .2s, border-color .2s;
+  }
+  .chip:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 1.8rem; transition: transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: var(--accent); }
+  .card.compact { max-width: 480px; }
+  .card .tag { color: var(--accent); font-size: .8rem; font-weight: 600; }
+  .card h3 { margin: .5rem 0; font-size: 1.25rem; }
+  .card p { color: var(--muted); font-size: .95rem; }
+  .card .chips { margin-top: 1rem; }
+  .card .go { display: inline-block; margin-top: 1rem; color: var(--accent); font-weight: 600; font-size: .9rem; }
+  .shot {
+    aspect-ratio: 16/9; border: 1px dashed var(--border); border-radius: 10px;
+    margin-bottom: 1.2rem; display: grid; place-items: center;
+    color: var(--muted); font-size: .85rem;
+  }
+  .shots { position: relative; margin-bottom: 1.2rem; }
+  .shots input { position: absolute; opacity: 0; }
+  .shots a { display: none; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .shots img { display: block; width: 100%; height: auto; }
+  #cs1:checked ~ a:nth-of-type(1),
+  #cs2:checked ~ a:nth-of-type(2),
+  #cs3:checked ~ a:nth-of-type(3) { display: block; }
+  .dots { display: flex; justify-content: center; gap: .6rem; margin-top: .8rem; }
+  .dots label { width: 10px; height: 10px; border-radius: 50%; background: var(--border); cursor: pointer; }
+  #cs1:checked ~ .dots label:nth-of-type(1),
+  #cs2:checked ~ .dots label:nth-of-type(2),
+  #cs3:checked ~ .dots label:nth-of-type(3) { background: var(--accent); }
+  #cs1:focus-visible ~ .dots label:nth-of-type(1),
+  #cs2:focus-visible ~ .dots label:nth-of-type(2),
+  #cs3:focus-visible ~ .dots label:nth-of-type(3) { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .contact { text-align: center; }
+  .contact p { color: var(--muted); margin-bottom: 1.5rem; }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; color: var(--muted); font-size: .9rem; }
+
+  .reveal { opacity: 0; transform: translateY(25px); transition: opacity .6s, transform .6s; }
+  .reveal.show { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span>Irfan Setiawan</span>.</div>
+    <a class="nav-link" href="#about">About me</a>
+  </div>
+</header>
+
+<main>
+  <section id="about" class="intro">
+    <div class="wrap about">
+      <img class="portrait" src="profile%20pic.PNG" alt="Irfan Setiawan" width="180" height="180">
+      <div class="about-text">
+        <div class="eyebrow">About me</div>
+        <h1><span class="grad">Irfan Setiawan</span></h1>
+        <p class="aka">a.k.a syosdev</p>
+        <p>I’m Irfan, an app builder based in Balikpapan. I use AI-assisted development to ship Windows desktop software: I decide what gets built, test it, and keep iterating until it works for the people using it.</p>
+        <div class="stats">
+          <div class="stat"><b>2</b><span>on Microsoft Store</span></div>
+          <div class="stat"><b>1</b><span>Android app</span></div>
+          <div class="stat"><b>1</b><span>in development</span></div>
+        </div>
+        <div class="btns">
+          <a class="btn primary" href="#creanotes">View my apps</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="creanotes" class="wrap reveal">
+    <div class="eyebrow">Microsoft Store</div>
+    <h2>Creanotes</h2>
+    <article class="card">
+      <div class="shots">
+        <input type="radio" name="creanotes" id="cs1" aria-label="Creanotes design 1" checked>
+        <input type="radio" name="creanotes" id="cs2" aria-label="Creanotes design 2">
+        <input type="radio" name="creanotes" id="cs3" aria-label="Creanotes design 3">
+        <a href="Creanotes%201.png" target="_blank" rel="noopener"><img src="Creanotes%201.png" alt="Creanotes design 1" width="1920" height="1080"></a>
+        <a href="Creanotes%2021.png" target="_blank" rel="noopener"><img src="Creanotes%2021.png" alt="Creanotes design 2" width="1920" height="1080"></a>
+        <a href="Creanotes%203.png" target="_blank" rel="noopener"><img src="Creanotes%203.png" alt="Creanotes design 3" width="1920" height="1080"></a>
+        <div class="dots">
+          <label for="cs1" aria-label="Show design 1"></label>
+          <label for="cs2" aria-label="Show design 2"></label>
+          <label for="cs3" aria-label="Show design 3"></label>
+        </div>
+      </div>
+      <span class="tag">PySide6 / Qt6 · File-based</span>
+      <h3>Notes that stay yours</h3>
+      <p>Floating notes saved as files on your machine, with four themes, media import and crash recovery.</p>
+      <div class="chips">
+        <span class="chip">PySide6 / Qt6</span>
+        <span class="chip">File-based</span>
+        <span class="chip">4 themes</span>
+        <span class="chip">Floating notes</span>
+        <span class="chip">Media import</span>
+        <span class="chip">Crash recovery</span>
+      </div>
+      <a class="go" href="https://apps.microsoft.com/detail/9NM449291PGR?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">View on Microsoft Store →</a>
+    </article>
+  </section>
+
+  <section id="jobtr" class="wrap reveal">
+    <div class="eyebrow">Microsoft Store</div>
+    <h2>Jobtr</h2>
+    <article class="card">
+      <div class="shot">screenshot / icon</div>
+      <span class="tag">Tauri v2 · MSIX / Store</span>
+      <h3>Data-safe by design</h3>
+      <p>Upgrades protect your data first. Certification, migrations and backups run before anything touches your files. Packaged as MSIX for the Microsoft Store.</p>
+      <div class="chips">
+        <span class="chip">Tauri v2</span>
+        <span class="chip">React 19</span>
+        <span class="chip">Rust</span>
+        <span class="chip">SQLite</span>
+        <span class="chip">MSIX / Store</span>
+      </div>
+      <a class="go" href="https://apps.microsoft.com/detail/9PMSV6RMVQDD?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">View on Microsoft Store →</a>
+    </article>
+  </section>
+
+  <section id="perpul" class="wrap reveal">
+    <div class="eyebrow">Android · Open source</div>
+    <h2>Perpul</h2>
+    <article class="card">
+      <div class="shot">screenshot / icon</div>
+      <span class="tag">Flutter / Dart · sqflite</span>
+      <h3>Cek mampu beli sebelum jajan</h3>
+      <p>An offline personal budget tracker with an Indonesian UI and Rupiah formatting. Daily spending allowance, purchase checks, savings and notes — all local, with no accounts, network or analytics.</p>
+      <div class="chips">
+        <span class="chip">Flutter / Dart</span>
+        <span class="chip">sqflite</span>
+        <span class="chip">Offline-first</span>
+        <span class="chip">Jatah harian</span>
+        <span class="chip">Tabungan</span>
+        <span class="chip">Indonesian / Rupiah</span>
+      </div>
+      <a class="go" href="https://github.com/syosdev/perpul" target="_blank" rel="noopener">View on GitHub →</a>
+    </article>
+  </section>
+
+  <section id="panth3r" class="wrap reveal">
+    <div class="eyebrow">Currently building</div>
+    <h2>PANTH3R</h2>
+    <article class="card compact">
+      <span class="tag">Unreleased · In progress</span>
+      <h3>PANTH3R</h3>
+      <p>Something new is taking shape. Details soon.</p>
+    </article>
+  </section>
+
+  <section id="skills" class="wrap reveal">
+    <div class="eyebrow">What I bring</div>
+    <h2>What I bring</h2>
+    <div class="chips">
+      <span class="chip">AI-assisted development</span>
+      <span class="chip">Qt / Tauri / MSIX</span>
+      <span class="chip">React / Vite</span>
+      <span class="chip">SQLite / Rust</span>
+      <span class="chip">Certification / migrations / backups</span>
+    </div>
+  </section>
+
+  <section id="contact" class="contact wrap reveal">
+    <div class="eyebrow">Say hello</div>
+    <h2>Let's work together</h2>
+    <p>Have a project in mind or just want to connect? My inbox is open.</p>
+    <div class="btns">
+      <a class="btn primary" href="ADD_GITHUB_URL" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="mailto:you@example.com">Email</a>
+      <a class="btn ghost" href="ADD_LINKEDIN_URL" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Built with HTML, CSS &amp; JS · Hosted on GitHub Pages · © <span id="year"></span> Irfan Setiawan</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
