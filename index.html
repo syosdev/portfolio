@@ -88,27 +88,36 @@
     padding: 1.8rem; transition: transform .25s, box-shadow .25s, border-color .25s;
   }
   .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: var(--accent); }
-  .card.compact { max-width: 480px; }
   .card .tag { color: var(--accent); font-size: .8rem; font-weight: 600; }
   .card h3 { margin: .5rem 0; font-size: 1.25rem; }
   .card p { color: var(--muted); font-size: .95rem; }
   .card .chips { margin-top: 1rem; }
   .card .go { display: inline-block; margin-top: 1rem; color: var(--accent); font-weight: 600; font-size: .9rem; }
-  .shot {
-    aspect-ratio: 16/9; border: 1px dashed var(--border); border-radius: 10px;
-    margin-bottom: 1.2rem; display: grid; place-items: center;
-    color: var(--muted); font-size: .85rem;
-  }
+  .card.split { display: grid; grid-template-columns: 300px 1fr; gap: 2rem; align-items: start; }
+  @media (max-width: 700px) { .card.split { grid-template-columns: 1fr; } }
   .shots { position: relative; margin-bottom: 1.2rem; }
+  .shots.single > a { display: block; }
+  .card.split .shots { margin-bottom: 0; }
+  .shots.portrait { max-width: 300px; margin-inline: auto; }
   .shots input { position: absolute; opacity: 0; }
   .shots a { display: none; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
   .shots img { display: block; width: 100%; height: auto; }
   .shots:has(input:nth-of-type(1):checked) > a:nth-of-type(1),
   .shots:has(input:nth-of-type(2):checked) > a:nth-of-type(2),
   .shots:has(input:nth-of-type(3):checked) > a:nth-of-type(3) { display: block; }
-  .dots { display: flex; align-items: center; justify-content: center; gap: .6rem; margin-top: .8rem; }
-  .dots label { width: 10px; height: 10px; border-radius: 50%; background: var(--border); cursor: pointer; }
-  .dots button { background: none; border: 0; padding: 0 .3rem; color: var(--muted); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+  .dots {
+    display: flex; align-items: center; justify-content: center; gap: .6rem;
+    width: fit-content; margin: 1rem auto 0; padding: .35rem .75rem;
+    border: 1px solid var(--border); border-radius: 999px; background: var(--bg);
+  }
+  .dots label { width: 8px; height: 8px; border-radius: 50%; background: color-mix(in srgb, var(--muted) 35%, transparent); cursor: pointer; }
+  .dots button {
+    position: absolute; top: 0; bottom: 2.35rem; width: 1.4rem;
+    display: grid; place-items: center; background: none; border: 0;
+    color: var(--muted); font-size: 1.5rem; line-height: 1; cursor: pointer;
+  }
+  .dots .prev { left: -1.5rem; }
+  .dots .next { right: -1.5rem; }
   .dots button:hover:not(:disabled) { color: var(--accent); }
   .dots button:disabled { opacity: .35; cursor: default; }
   .shots:has(input:nth-of-type(1):checked) > .dots label:nth-of-type(1),
@@ -228,30 +237,58 @@
   <section id="perpul" class="wrap reveal">
     <div class="eyebrow">Android · Open source</div>
     <h2>Perpul</h2>
-    <article class="card">
-      <div class="shot">screenshot / icon</div>
-      <span class="tag">Flutter / Dart · sqflite</span>
-      <h3>Cek mampu beli sebelum jajan</h3>
-      <p>An offline personal budget tracker with an Indonesian UI and Rupiah formatting. Daily spending allowance, purchase checks, savings and notes — all local, with no accounts, network or analytics.</p>
-      <div class="chips">
-        <span class="chip">Flutter / Dart</span>
-        <span class="chip">sqflite</span>
-        <span class="chip">Offline-first</span>
-        <span class="chip">Jatah harian</span>
-        <span class="chip">Tabungan</span>
-        <span class="chip">Indonesian / Rupiah</span>
+    <article class="card split">
+      <div class="shots portrait">
+        <input type="radio" name="perpul" id="pp1" aria-label="Perpul screenshot 1" checked>
+        <input type="radio" name="perpul" id="pp2" aria-label="Perpul screenshot 2">
+        <input type="radio" name="perpul" id="pp3" aria-label="Perpul screenshot 3">
+        <a href="Perpul%201.png" target="_blank" rel="noopener"><img src="Perpul%201.png" alt="Perpul screenshot 1" width="1080" height="1920"></a>
+        <a href="Perpul%202.png" target="_blank" rel="noopener"><img src="Perpul%202.png" alt="Perpul screenshot 2" width="1080" height="1920"></a>
+        <a href="Perpul%203.png" target="_blank" rel="noopener"><img src="Perpul%203.png" alt="Perpul screenshot 3" width="1080" height="1920"></a>
+        <div class="dots">
+          <button type="button" class="prev" aria-label="Previous screenshot">‹</button>
+          <label for="pp1" aria-label="Show screenshot 1"></label>
+          <label for="pp2" aria-label="Show screenshot 2"></label>
+          <label for="pp3" aria-label="Show screenshot 3"></label>
+          <button type="button" class="next" aria-label="Next screenshot">›</button>
+        </div>
       </div>
-      <a class="go" href="https://github.com/syosdev/perpul" target="_blank" rel="noopener">View on GitHub →</a>
+      <div class="info">
+        <span class="tag">Flutter / Dart · sqflite</span>
+        <h3>Cek mampu beli sebelum jajan</h3>
+        <p>An offline personal budget tracker with an Indonesian UI and Rupiah formatting. Daily spending allowance, purchase checks, savings and notes — all local, with no accounts, network or analytics.</p>
+        <div class="chips">
+          <span class="chip">Flutter / Dart</span>
+          <span class="chip">sqflite</span>
+          <span class="chip">Offline-first</span>
+          <span class="chip">Jatah harian</span>
+          <span class="chip">Tabungan</span>
+          <span class="chip">Indonesian / Rupiah</span>
+        </div>
+        <a class="go" href="https://github.com/syosdev/perpul" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
     </article>
   </section>
 
   <section id="panth3r" class="wrap reveal">
-    <div class="eyebrow">Currently building</div>
+    <div class="eyebrow">Windows · Open source</div>
     <h2>PANTH3R</h2>
-    <article class="card compact">
-      <span class="tag">Unreleased · In progress</span>
-      <h3>PANTH3R</h3>
-      <p>Something new is taking shape. Details soon.</p>
+    <article class="card">
+      <div class="shots single">
+        <a href="Panther.png" target="_blank" rel="noopener"><img src="Panther.png" alt="PANTH3R music player showcase" width="1920" height="1080"></a>
+      </div>
+      <span class="tag">Python / pygame-ce · Desktop</span>
+      <h3>A music player with a pulse</h3>
+      <p>A local desktop music player built with pygame-ce. Playlists, favorites and shuffle, a live audio visualizer, accent themes and always-on-top mode — with settings kept in a small local config file. Packaged as a Windows executable with PyInstaller.</p>
+      <div class="chips">
+        <span class="chip">Python / pygame-ce</span>
+        <span class="chip">NumPy</span>
+        <span class="chip">Mutagen</span>
+        <span class="chip">Pillow</span>
+        <span class="chip">Audio visualizer</span>
+        <span class="chip">PyInstaller</span>
+      </div>
+      <a class="go" href="https://github.com/syosdev/PANTH3R" target="_blank" rel="noopener">View on GitHub →</a>
     </article>
   </section>
 
