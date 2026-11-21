@@ -98,7 +98,7 @@
   .shots { position: relative; margin-bottom: 1.2rem; }
   .shots.single > a { display: block; }
   .card.split .shots { margin-bottom: 0; }
-  .shots.portrait { max-width: 300px; margin-inline: auto; }
+  .shots.vertical { max-width: 300px; margin-inline: auto; }
   .shots input { position: absolute; opacity: 0; }
   .shots a { display: none; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
   .shots img { display: block; width: 100%; height: auto; }
@@ -238,7 +238,7 @@
     <div class="eyebrow">Android · Open source</div>
     <h2>Perpul</h2>
     <article class="card split">
-      <div class="shots portrait">
+      <div class="shots vertical">
         <input type="radio" name="perpul" id="pp1" aria-label="Perpul screenshot 1" checked>
         <input type="radio" name="perpul" id="pp2" aria-label="Perpul screenshot 2">
         <input type="radio" name="perpul" id="pp3" aria-label="Perpul screenshot 3">
@@ -330,6 +330,7 @@
 
   document.querySelectorAll('.shots').forEach(shots => {
     const slides = shots.querySelectorAll('input[type=radio]');
+    if (!slides.length) return;
     const prev = shots.querySelector('.prev'), next = shots.querySelector('.next');
     const step = d => slides[Math.max(0, Math.min(slides.length - 1, [...slides].findIndex(el => el.checked) + d))].click();
     const sync = () => { prev.disabled = slides[0].checked; next.disabled = slides[slides.length - 1].checked; };
