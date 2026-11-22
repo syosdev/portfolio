@@ -32,14 +32,15 @@
     background: color-mix(in srgb, var(--bg) 85%, transparent);
     backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
   }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 64px; flex-wrap: wrap; padding: .5rem 0; }
   .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -.5px; }
   .logo span { color: var(--accent); }
-  .nav-link { color: var(--muted); font-size: .95rem; transition: color .2s; }
+  .nav-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .nav-link { color: var(--muted); font-size: .9rem; white-space: nowrap; transition: color .2s; }
   .nav-link:hover { color: var(--accent); }
 
   .intro {
-    min-height: 88vh; display: grid; place-items: center;
+    min-height: 75vh; padding: 2.5rem 0; display: grid; place-items: center;
     background: radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%);
   }
   h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -2px; }
@@ -48,14 +49,14 @@
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .aka {
-    font-size: 1.05rem; font-weight: 600; margin-bottom: 1.5rem;
+    font-size: 1.05rem; font-weight: 600; margin-bottom: 1rem;
     background: linear-gradient(90deg, var(--hero-a), var(--hero-b), var(--hero-a));
     background-size: 200% auto;
     -webkit-background-clip: text; background-clip: text; color: transparent;
     animation: shimmer 4s linear infinite;
   }
   @keyframes shimmer { to { background-position: 200% center; } }
-  .stats { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .stats { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
   .stat b { display: block; font-size: 1.8rem; line-height: 1.2; color: var(--hero-a); }
   .stat span { color: var(--muted); font-size: .85rem; }
   .btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
@@ -66,14 +67,30 @@
   .btn.ghost { border: 1px solid var(--border); }
   .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
 
-  section { padding: 6rem 0; }
+  section { padding: 4rem 0; }
   .eyebrow { color: var(--accent); font-weight: 700; font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; }
   h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: .4rem 0 2.5rem; letter-spacing: -1px; }
-  .about { display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
+  .title-card {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+    margin: -1.5rem -1.5rem 1.1rem; padding: 1rem 1.5rem;
+    border-radius: 12px 16px 0 0;
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--app) 9%, var(--surface));
+  }
+  .title-card .num {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.1;
+    color: color-mix(in srgb, var(--app) 55%, var(--muted));
+  }
+  .title-card h2 {
+    margin: 0; font-size: clamp(2rem, 5.5vw, 3rem); line-height: 1.1;
+    color: var(--app, var(--accent));
+  }
+  .card .title-card p { color: var(--muted); font-size: .9rem; font-weight: 500; margin-top: .25rem; }
+  .about { display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
   .about .stats, .about .btns { justify-content: flex-start; }
   .about-text { flex: 1 1 300px; }
   .portrait { width: 180px; height: 180px; border-radius: 16px; object-fit: cover; border: 1px solid var(--border); box-shadow: var(--shadow); }
-  .about p { color: var(--muted); max-width: 700px; font-size: 1.05rem; }
+  .about p { color: var(--muted); max-width: 700px; font-size: 1.05rem; line-height: 1.5; }
   .about p + .eyebrow { margin-top: 1.5rem; }
 
   .chips { display: flex; gap: .8rem; flex-wrap: wrap; }
@@ -84,18 +101,22 @@
   .chip:hover { transform: translateY(-3px); border-color: var(--accent); }
 
   .card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-    padding: 1.8rem; transition: transform .25s, box-shadow .25s, border-color .25s;
+    background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--app, var(--accent));
+    border-radius: 16px;
+    padding: 1.5rem; transition: transform .25s, box-shadow .25s, border-color .25s;
   }
-  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: var(--accent); }
-  .card .tag { color: var(--accent); font-size: .8rem; font-weight: 600; }
-  .card h3 { margin: .5rem 0; font-size: 1.25rem; }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: var(--app, var(--accent)); }
+  .card .store {
+    display: inline-block; margin-bottom: .5rem; padding: .35rem .8rem; border-radius: 999px;
+    background: color-mix(in srgb, var(--app, var(--accent)) 14%, transparent);
+    color: var(--app, var(--hero-a)); font-size: .8rem; font-weight: 700;
+  }
   .card p { color: var(--muted); font-size: .95rem; }
-  .card .chips { margin-top: 1rem; }
-  .card .go { display: inline-block; margin-top: 1rem; color: var(--accent); font-weight: 600; font-size: .9rem; }
-  .card.split { display: grid; grid-template-columns: 300px 1fr; gap: 2rem; align-items: start; }
+  .card .chips { margin-top: .8rem; }
+  .card.split { display: grid; grid-template-columns: 300px 1fr; column-gap: 1.5rem; row-gap: 0; align-items: start; }
+  .card.split .title-card { grid-column: 1 / -1; }
   @media (max-width: 700px) { .card.split { grid-template-columns: 1fr; } }
-  .shots { position: relative; margin-bottom: 1.2rem; }
+  .shots { position: relative; margin-bottom: 1rem; }
   .shots.single > a { display: block; }
   .card.split .shots { margin-bottom: 0; }
   .shots.vertical { max-width: 300px; margin-inline: auto; }
@@ -141,7 +162,13 @@
 <header>
   <div class="wrap nav">
     <div class="logo"><span>Irfan Setiawan</span>.</div>
-    <a class="nav-link" href="#about">About me</a>
+    <nav class="nav-links">
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="https://apps.microsoft.com/detail/9NM449291PGR?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">Creanotes ↗</a>
+      <a class="nav-link" href="https://apps.microsoft.com/detail/9PMSV6RMVQDD?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">Jobtr ↗</a>
+      <a class="nav-link" href="https://github.com/syosdev/perpul" target="_blank" rel="noopener">Perpul ↗</a>
+      <a class="nav-link" href="https://github.com/syosdev/PANTH3R" target="_blank" rel="noopener">PANTH3R ↗</a>
+    </nav>
   </div>
 </header>
 
@@ -167,10 +194,12 @@
     </div>
   </section>
 
-  <section id="creanotes" class="wrap reveal">
-    <div class="eyebrow">Microsoft Store</div>
-    <h2>Creanotes</h2>
+  <section id="creanotes" class="wrap reveal" style="--app: #1a1a1f">
     <article class="card">
+      <div class="title-card">
+        <span class="num">01</span>
+        <div><h2>Creanotes</h2><p>Script and note-taking app built for content creators</p></div>
+      </div>
       <div class="shots">
         <input type="radio" name="creanotes" id="cs1" aria-label="Creanotes design 1" checked>
         <input type="radio" name="creanotes" id="cs2" aria-label="Creanotes design 2">
@@ -186,8 +215,7 @@
           <button type="button" class="next" aria-label="Next design">›</button>
         </div>
       </div>
-      <span class="tag">PySide6 / Qt6 · File-based</span>
-      <h3>Notes that stay yours</h3>
+      <span class="store">Available on Microsoft Store</span>
       <p>Floating notes saved as files on your machine, with four themes, media import and crash recovery.</p>
       <div class="chips">
         <span class="chip">PySide6 / Qt6</span>
@@ -197,14 +225,15 @@
         <span class="chip">Media import</span>
         <span class="chip">Crash recovery</span>
       </div>
-      <a class="go" href="https://apps.microsoft.com/detail/9NM449291PGR?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">View on Microsoft Store →</a>
     </article>
   </section>
 
-  <section id="jobtr" class="wrap reveal">
-    <div class="eyebrow">Microsoft Store</div>
-    <h2>Jobtr</h2>
+  <section id="jobtr" class="wrap reveal" style="--app: #1f5fbf">
     <article class="card">
+      <div class="title-card">
+        <span class="num">02</span>
+        <div><h2>Jobtr</h2><p>Offline job tracking with useful extras</p></div>
+      </div>
       <div class="shots">
         <input type="radio" name="jobtr" id="jt1" aria-label="Jobtr design 1" checked>
         <input type="radio" name="jobtr" id="jt2" aria-label="Jobtr design 2">
@@ -220,8 +249,7 @@
           <button type="button" class="next" aria-label="Next design">›</button>
         </div>
       </div>
-      <span class="tag">Tauri v2 · MSIX / Store</span>
-      <h3>Data-safe by design</h3>
+      <span class="store">Available on Microsoft Store</span>
       <p>Upgrades protect your data first. Certification, migrations and backups run before anything touches your files. Packaged as MSIX for the Microsoft Store.</p>
       <div class="chips">
         <span class="chip">Tauri v2</span>
@@ -230,14 +258,15 @@
         <span class="chip">SQLite</span>
         <span class="chip">MSIX / Store</span>
       </div>
-      <a class="go" href="https://apps.microsoft.com/detail/9PMSV6RMVQDD?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">View on Microsoft Store →</a>
     </article>
   </section>
 
-  <section id="perpul" class="wrap reveal">
-    <div class="eyebrow">Android · Open source</div>
-    <h2>Perpul</h2>
+  <section id="perpul" class="wrap reveal" style="--app: #2677bd">
     <article class="card split">
+      <div class="title-card">
+        <span class="num">03</span>
+        <div><h2>Perpul</h2><p>Know what you can afford before you buy</p></div>
+      </div>
       <div class="shots vertical">
         <input type="radio" name="perpul" id="pp1" aria-label="Perpul screenshot 1" checked>
         <input type="radio" name="perpul" id="pp2" aria-label="Perpul screenshot 2">
@@ -254,41 +283,39 @@
         </div>
       </div>
       <div class="info">
-        <span class="tag">Flutter / Dart · sqflite</span>
-        <h3>Cek mampu beli sebelum jajan</h3>
         <p>An offline personal budget tracker with an Indonesian UI and Rupiah formatting. Daily spending allowance, purchase checks, savings and notes — all local, with no accounts, network or analytics.</p>
         <div class="chips">
           <span class="chip">Flutter / Dart</span>
+          <span class="chip">Android · open source</span>
           <span class="chip">sqflite</span>
           <span class="chip">Offline-first</span>
           <span class="chip">Jatah harian</span>
           <span class="chip">Tabungan</span>
           <span class="chip">Indonesian / Rupiah</span>
         </div>
-        <a class="go" href="https://github.com/syosdev/perpul" target="_blank" rel="noopener">View on GitHub →</a>
       </div>
     </article>
   </section>
 
-  <section id="panth3r" class="wrap reveal">
-    <div class="eyebrow">Windows · Open source</div>
-    <h2>PANTH3R</h2>
+  <section id="panth3r" class="wrap reveal" style="--app: #8b2029">
     <article class="card">
+      <div class="title-card">
+        <span class="num">04</span>
+        <div><h2>PANTH3R</h2><p>Retro-styled music player with a live visualizer</p></div>
+      </div>
       <div class="shots single">
         <a href="Panther.png" target="_blank" rel="noopener"><img src="Panther.png" alt="PANTH3R music player showcase" width="1920" height="1080"></a>
       </div>
-      <span class="tag">Python / pygame-ce · Desktop</span>
-      <h3>A music player with a pulse</h3>
       <p>A local desktop music player built with pygame-ce. Playlists, favorites and shuffle, a live audio visualizer, accent themes and always-on-top mode — with settings kept in a small local config file. Packaged as a Windows executable with PyInstaller.</p>
       <div class="chips">
         <span class="chip">Python / pygame-ce</span>
+        <span class="chip">Windows · open source</span>
         <span class="chip">NumPy</span>
         <span class="chip">Mutagen</span>
         <span class="chip">Pillow</span>
         <span class="chip">Audio visualizer</span>
         <span class="chip">PyInstaller</span>
       </div>
-      <a class="go" href="https://github.com/syosdev/PANTH3R" target="_blank" rel="noopener">View on GitHub →</a>
     </article>
   </section>
 
