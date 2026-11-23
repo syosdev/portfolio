@@ -75,7 +75,10 @@
   .info-chip { color: var(--muted); font-size: .8rem; }
   @media (max-width: 520px) {
     .nav { justify-content: flex-start; gap: .5rem; padding: .6rem 0; }
-    .nav-left, .nav-contact { width: 100%; }
+    .nav-left, .nav-contact { width: auto; flex-wrap: nowrap; gap: .35rem; }
+    .nav-left .logo { font-size: .95rem; }
+    .nav-left .info-chip { font-size: .7rem; padding-left: .4rem; }
+    .country { display: none; }
     .nav-links { width: 100%; justify-content: flex-start; }
     .nav .btn { padding: .35rem .7rem; font-size: .75rem; }
   }
@@ -190,7 +193,7 @@
       <div class="logo"><span>Irfan Setiawan</span>.</div>
       <div class="nav-contact">
         <span class="info-chip">089510836298</span>
-        <span class="info-chip">Balikpapan, Indonesia</span>
+        <span class="info-chip">Balikpapan<span class="country">, Indonesia</span></span>
       </div>
     </div>
     <div class="nav-links">
