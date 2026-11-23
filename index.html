@@ -69,7 +69,12 @@
   .nav-links { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
   .nav .btn { padding: .4rem .8rem; font-size: .8rem; }
   .info-chip { color: var(--muted); font-size: .8rem; }
-  @media (max-width: 520px) { .nav-links { justify-content: flex-start; } }
+  @media (max-width: 700px) { .info-chip { display: none; } }
+  @media (max-width: 520px) {
+    .nav { justify-content: flex-start; gap: .5rem; padding: .6rem 0; }
+    .nav-links { width: 100%; justify-content: flex-start; }
+    .nav .btn { padding: .35rem .7rem; font-size: .75rem; }
+  }
 
   section { padding: 4rem 0; }
   .eyebrow { color: var(--accent); font-weight: 700; font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; }
