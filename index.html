@@ -35,6 +35,8 @@
   .nav { display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 64px; flex-wrap: wrap; padding: .5rem 0; }
   .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -.5px; }
   .logo span { color: var(--accent); }
+  .nav-left { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+  .nav-left .info-chip { padding-left: .75rem; border-left: 1px solid var(--border); white-space: nowrap; }
 
   .intro {
     min-height: 75vh; padding: 2.5rem 0; display: grid; place-items: center;
@@ -69,7 +71,6 @@
   .nav-links { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
   .nav .btn { padding: .4rem .8rem; font-size: .8rem; }
   .info-chip { color: var(--muted); font-size: .8rem; }
-  @media (max-width: 700px) { .info-chip { display: none; } }
   @media (max-width: 520px) {
     .nav { justify-content: flex-start; gap: .5rem; padding: .6rem 0; }
     .nav-links { width: 100%; justify-content: flex-start; }
@@ -177,10 +178,12 @@
 
 <header>
   <div class="wrap nav">
-    <div class="logo"><span>Irfan Setiawan</span>.</div>
-    <div class="nav-links">
+    <div class="nav-left">
+      <div class="logo"><span>Irfan Setiawan</span>.</div>
       <span class="info-chip">089510836298</span>
       <span class="info-chip">Balikpapan, Indonesia</span>
+    </div>
+    <div class="nav-links">
       <a class="btn ghost" href="https://github.com/syosdev" target="_blank" rel="noopener">My GitHub</a>
       <a class="btn ghost" href="mailto:irfansetiawan5055@gmail.com">My Email</a>
       <a class="btn ghost" href="https://www.linkedin.com/in/irfan-setiawan-5o550" target="_blank" rel="noopener">My LinkedIn</a>
@@ -222,8 +225,8 @@
         <input type="radio" name="creanotes" id="cs2" aria-label="Creanotes design 2">
         <input type="radio" name="creanotes" id="cs3" aria-label="Creanotes design 3">
         <a href="Creanotes%201.png" target="_blank" rel="noopener"><img src="Creanotes%201.png" alt="Creanotes design 1" width="1920" height="1080"></a>
-        <a href="Creanotes%2021.png" target="_blank" rel="noopener"><img src="Creanotes%2021.png" alt="Creanotes design 2" width="1920" height="1080"></a>
-        <a href="Creanotes%203.png" target="_blank" rel="noopener"><img src="Creanotes%203.png" alt="Creanotes design 3" width="1920" height="1080"></a>
+        <a href="Creanotes%203.png" target="_blank" rel="noopener"><img src="Creanotes%203.png" alt="Creanotes design 2" width="1920" height="1080"></a>
+        <a href="Creanotes%2021.png" target="_blank" rel="noopener"><img src="Creanotes%2021.png" alt="Creanotes design 3" width="1920" height="1080"></a>
         <div class="dots">
           <button type="button" class="prev" aria-label="Previous design">‹</button>
           <label for="cs1" aria-label="Show design 1"></label>
