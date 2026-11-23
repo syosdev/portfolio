@@ -37,6 +37,7 @@
   .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -.5px; }
   .logo span { color: var(--accent); }
   .nav-left { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+  .nav-contact { display: flex; align-items: center; gap: .75rem; flex-wrap: nowrap; white-space: nowrap; }
   .nav-left .info-chip { padding-left: .75rem; border-left: 1px solid var(--border); white-space: nowrap; }
 
   .intro {
@@ -74,6 +75,7 @@
   .info-chip { color: var(--muted); font-size: .8rem; }
   @media (max-width: 520px) {
     .nav { justify-content: flex-start; gap: .5rem; padding: .6rem 0; }
+    .nav-left, .nav-contact { width: 100%; }
     .nav-links { width: 100%; justify-content: flex-start; }
     .nav .btn { padding: .35rem .7rem; font-size: .75rem; }
   }
@@ -129,7 +131,7 @@
   .card .chips { margin-top: .8rem; }
   .card.split { display: grid; grid-template-columns: 300px 1fr; column-gap: 1.5rem; row-gap: 0; align-items: start; }
   .card.split .title-card { grid-column: 1 / -1; }
-  @media (max-width: 700px) { .card.split { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .card.split { grid-template-columns: 1fr; } .card.split .shots { margin-bottom: 1rem; } }
   .shots { position: relative; z-index: 2; margin-bottom: 1rem; }
   .shots.single > a { display: block; }
   .card.split .shots { margin-bottom: 0; }
@@ -163,11 +165,16 @@
   .shots:has(input:nth-of-type(3):focus-visible) > .dots label:nth-of-type(3) { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   #contact { padding: 3rem 0 2.5rem; }
-  .contact { text-align: center; }
+  .contact { text-align: left; }
   .contact h2 { margin-bottom: 1rem; }
   .contact p { color: var(--muted); margin-bottom: 1.25rem; }
-  .contact .btns + .eyebrow { margin-top: 1.5rem; }
-  .contact-info p { margin-bottom: .35rem; }
+  .contact .btns { justify-content: flex-start; }
+  .contact-details { margin-top: 1.5rem; }
+  .contact-details .eyebrow { padding-bottom: .5rem; border-bottom: 1px solid var(--border); margin-bottom: .75rem; }
+  .contact-info { max-width: 100%; }
+  .contact-info p { display: flex; gap: .75rem; margin-bottom: .35rem; }
+  .contact-info strong { flex: 0 0 5.5rem; text-align: left; }
+  .contact-info span { min-width: 0; overflow-wrap: anywhere; }
 
   footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; color: var(--muted); font-size: .9rem; }
 
@@ -181,8 +188,10 @@
   <div class="wrap nav">
     <div class="nav-left">
       <div class="logo"><span>Irfan Setiawan</span>.</div>
-      <span class="info-chip">089510836298</span>
-      <span class="info-chip">Balikpapan, Indonesia</span>
+      <div class="nav-contact">
+        <span class="info-chip">089510836298</span>
+        <span class="info-chip">Balikpapan, Indonesia</span>
+      </div>
     </div>
     <div class="nav-links">
       <a class="btn ghost" href="https://github.com/syosdev" target="_blank" rel="noopener">My GitHub</a>
@@ -347,10 +356,15 @@
       <a class="btn ghost" href="mailto:irfansetiawan5055@gmail.com">Email</a>
       <a class="btn ghost" href="https://www.linkedin.com/in/irfan-setiawan-5o550" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <div class="eyebrow">Contact details</div>
-    <div class="contact-info">
-      <p><strong>Phone:</strong> 089510836298</p>
-      <p><strong>Location:</strong> Kalimantan Timur, Balikpapan, Indonesia</p>
+    <div class="contact-details">
+      <div class="eyebrow">Contact details</div>
+      <div class="contact-info">
+        <p><strong>Phone:</strong><span>089510836298</span></p>
+        <p><strong>Location:</strong><span>Kalimantan Timur, Balikpapan, Indonesia</span></p>
+        <p><strong>Email:</strong><span>irfansetiawan5055@gmail.com</span></p>
+        <p><strong>GitHub:</strong><span>github.com/syosdev</span></p>
+        <p><strong>LinkedIn:</strong><span>linkedin.com/in/irfan-setiawan-5o550</span></p>
+      </div>
     </div>
   </section>
 </main>
