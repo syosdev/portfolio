@@ -32,17 +32,20 @@
     background: color-mix(in srgb, var(--bg) 85%, transparent);
     backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
   }
-  .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 64px; flex-wrap: wrap; padding: .5rem 0; }
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 64px; flex-wrap: wrap; padding: .5rem 0; }
   .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -.5px; }
   .logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .nav-link { color: var(--muted); font-size: .9rem; white-space: nowrap; transition: color .2s; }
-  .nav-link:hover { color: var(--accent); }
 
   .intro {
     min-height: 75vh; padding: 2.5rem 0; display: grid; place-items: center;
     background: radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%);
   }
+  #about { min-height: auto; padding-bottom: 0; }
+  #skills { padding-top: 0; padding-bottom: 1rem; }
+  #skills h2 { margin-bottom: 1.25rem; }
+  #skills::after { content: ''; display: block; width: 48px; height: 2px; margin-top: 1.5rem; background: var(--accent); }
+  #creanotes, #jobtr, #perpul, #panth3r { padding-top: 2rem; padding-bottom: 2rem; }
+  #creanotes { padding-top: 1rem; }
   h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.05; letter-spacing: -2px; }
   .grad {
     background: linear-gradient(90deg, var(--hero-a), var(--hero-b));
@@ -56,9 +59,6 @@
     animation: shimmer 4s linear infinite;
   }
   @keyframes shimmer { to { background-position: 200% center; } }
-  .stats { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .stat b { display: block; font-size: 1.8rem; line-height: 1.2; color: var(--hero-a); }
-  .stat span { color: var(--muted); font-size: .85rem; }
   .btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
   .btn {
     padding: .8rem 1.6rem; border-radius: 10px; font-weight: 600; transition: transform .2s, box-shadow .2s;
@@ -66,6 +66,10 @@
   .btn.primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); color: #fff; }
   .btn.ghost { border: 1px solid var(--border); }
   .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .nav-links { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
+  .nav .btn { padding: .4rem .8rem; font-size: .8rem; }
+  .info-chip { color: var(--muted); font-size: .8rem; }
+  @media (max-width: 520px) { .nav-links { justify-content: flex-start; } }
 
   section { padding: 4rem 0; }
   .eyebrow { color: var(--accent); font-weight: 700; font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; }
@@ -87,11 +91,9 @@
   }
   .card .title-card p { color: var(--muted); font-size: .9rem; font-weight: 500; margin-top: .25rem; }
   .about { display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
-  .about .stats, .about .btns { justify-content: flex-start; }
   .about-text { flex: 1 1 300px; }
   .portrait { width: 180px; height: 180px; border-radius: 16px; object-fit: cover; border: 1px solid var(--border); box-shadow: var(--shadow); }
   .about p { color: var(--muted); max-width: 700px; font-size: 1.05rem; line-height: 1.5; }
-  .about p + .eyebrow { margin-top: 1.5rem; }
 
   .chips { display: flex; gap: .8rem; flex-wrap: wrap; }
   .chip {
@@ -99,8 +101,11 @@
     background: var(--surface); font-size: .95rem; transition: transform .2s, border-color .2s;
   }
   .chip:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .benefits { display: grid; gap: .75rem; list-style: none; margin: 1rem 0 0; padding: 0; color: var(--muted); }
+  .benefits li { padding-left: 1rem; border-left: 3px solid var(--accent); }
 
   .card {
+    position: relative;
     background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--app, var(--accent));
     border-radius: 16px;
     padding: 1.5rem; transition: transform .25s, box-shadow .25s, border-color .25s;
@@ -111,12 +116,14 @@
     background: color-mix(in srgb, var(--app, var(--accent)) 14%, transparent);
     color: var(--app, var(--hero-a)); font-size: .8rem; font-weight: 700;
   }
+  .card .store::before { content: '↗'; margin-right: .4rem; }
+  .card .store::after { content: ''; position: absolute; inset: 0; }
   .card p { color: var(--muted); font-size: .95rem; }
   .card .chips { margin-top: .8rem; }
   .card.split { display: grid; grid-template-columns: 300px 1fr; column-gap: 1.5rem; row-gap: 0; align-items: start; }
   .card.split .title-card { grid-column: 1 / -1; }
   @media (max-width: 700px) { .card.split { grid-template-columns: 1fr; } }
-  .shots { position: relative; margin-bottom: 1rem; }
+  .shots { position: relative; z-index: 2; margin-bottom: 1rem; }
   .shots.single > a { display: block; }
   .card.split .shots { margin-bottom: 0; }
   .shots.vertical { max-width: 300px; margin-inline: auto; }
@@ -148,8 +155,12 @@
   .shots:has(input:nth-of-type(2):focus-visible) > .dots label:nth-of-type(2),
   .shots:has(input:nth-of-type(3):focus-visible) > .dots label:nth-of-type(3) { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+  #contact { padding: 3rem 0 2.5rem; }
   .contact { text-align: center; }
-  .contact p { color: var(--muted); margin-bottom: 1.5rem; }
+  .contact h2 { margin-bottom: 1rem; }
+  .contact p { color: var(--muted); margin-bottom: 1.25rem; }
+  .contact .btns + .eyebrow { margin-top: 1.5rem; }
+  .contact-info p { margin-bottom: .35rem; }
 
   footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; color: var(--muted); font-size: .9rem; }
 
@@ -162,13 +173,13 @@
 <header>
   <div class="wrap nav">
     <div class="logo"><span>Irfan Setiawan</span>.</div>
-    <nav class="nav-links">
-      <a class="nav-link" href="#about">About</a>
-      <a class="nav-link" href="https://apps.microsoft.com/detail/9NM449291PGR?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">Creanotes ↗</a>
-      <a class="nav-link" href="https://apps.microsoft.com/detail/9PMSV6RMVQDD?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">Jobtr ↗</a>
-      <a class="nav-link" href="https://github.com/syosdev/perpul" target="_blank" rel="noopener">Perpul ↗</a>
-      <a class="nav-link" href="https://github.com/syosdev/PANTH3R" target="_blank" rel="noopener">PANTH3R ↗</a>
-    </nav>
+    <div class="nav-links">
+      <span class="info-chip">089510836298</span>
+      <span class="info-chip">Balikpapan, Indonesia</span>
+      <a class="btn ghost" href="https://github.com/syosdev" target="_blank" rel="noopener">My GitHub</a>
+      <a class="btn ghost" href="mailto:irfansetiawan5055@gmail.com">My Email</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/irfan-setiawan-5o550" target="_blank" rel="noopener">My LinkedIn</a>
+    </div>
   </div>
 </header>
 
@@ -181,17 +192,18 @@
         <h1><span class="grad">Irfan Setiawan</span></h1>
         <p class="aka">a.k.a syosdev</p>
         <p>I’m Irfan, an app builder based in Balikpapan. I use AI-assisted development to ship Windows desktop software: I decide what gets built, test it, and keep iterating until it works for the people using it.</p>
-        <div class="stats">
-          <div class="stat"><b>2</b><span>on Microsoft Store</span></div>
-          <div class="stat"><b>1</b><span>Android app</span></div>
-          <div class="stat"><b>1</b><span>in development</span></div>
-        </div>
-        <div class="btns">
-          <a class="btn primary" href="#creanotes">View my apps</a>
-          <a class="btn ghost" href="#contact">Get in touch</a>
-        </div>
       </div>
     </div>
+  </section>
+
+  <section id="skills" class="wrap reveal">
+    <h2>What I bring</h2>
+    <ul class="benefits">
+      <li>Shipped two apps to the Microsoft Store plus a Windows music player, from UI to packaging.</li>
+      <li>Built with AI-assisted workflows, then tested and iterated until each release worked in real use.</li>
+      <li>Kept data local and safe with SQLite migrations, backups and offline storage.</li>
+      <li>Worked across Qt, Tauri, React and Rust, picking the stack per app.</li>
+    </ul>
   </section>
 
   <section id="creanotes" class="wrap reveal" style="--app: #1a1a1f">
@@ -215,8 +227,9 @@
           <button type="button" class="next" aria-label="Next design">›</button>
         </div>
       </div>
-      <span class="store">Available on Microsoft Store</span>
-      <p>Floating notes saved as files on your machine, with four themes, media import and crash recovery.</p>
+      <a class="store" href="https://apps.microsoft.com/detail/9NM449291PGR?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">Available on Microsoft Store</a>
+      <p>My first and most ambitious app, built in under a month. It focuses on what content creators actually need: gathering and managing media, a script-writing workflow, and much more. Built with opencode.</p>
+      <p>Your notes live in plain files you control. Pin a note as a floating window, drag in media, and pick up where you left off even after a crash.</p>
       <div class="chips">
         <span class="chip">PySide6 / Qt6</span>
         <span class="chip">File-based</span>
@@ -249,14 +262,13 @@
           <button type="button" class="next" aria-label="Next design">›</button>
         </div>
       </div>
-      <span class="store">Available on Microsoft Store</span>
-      <p>Upgrades protect your data first. Certification, migrations and backups run before anything touches your files. Packaged as MSIX for the Microsoft Store.</p>
+      <a class="store" href="https://apps.microsoft.com/detail/9PMSV6RMVQDD?hl=en-us&amp;gl=ID&amp;ocid=pdpshare" target="_blank" rel="noopener">Available on Microsoft Store</a>
+      <p>Built in under a month with opencode. Jobtr keeps every application in one place, offline, so job hunting is one less thing to juggle. Certification, migrations and backups run before anything touches your files. Packaged as MSIX for the Microsoft Store.</p>
       <div class="chips">
         <span class="chip">Tauri v2</span>
         <span class="chip">React 19</span>
         <span class="chip">Rust</span>
         <span class="chip">SQLite</span>
-        <span class="chip">MSIX / Store</span>
       </div>
     </article>
   </section>
@@ -283,14 +295,14 @@
         </div>
       </div>
       <div class="info">
-        <p>An offline personal budget tracker with an Indonesian UI and Rupiah formatting. Daily spending allowance, purchase checks, savings and notes — all local, with no accounts, network or analytics.</p>
+        <a class="store" href="https://github.com/syosdev/perpul" target="_blank" rel="noopener">Available on GitHub</a>
+        <p>Perpul turns your balance and payday into a daily spending allowance, then tells you whether a planned purchase still fits your budget before you buy. It shows the new allowance and the percentage drop first. A savings simulator tests 10, 20, or 30 percent targets and projects your savings up to three years.</p>
         <div class="chips">
           <span class="chip">Flutter / Dart</span>
-          <span class="chip">Android · open source</span>
-          <span class="chip">sqflite</span>
+          <span class="chip">Android</span>
           <span class="chip">Offline-first</span>
-          <span class="chip">Jatah harian</span>
-          <span class="chip">Tabungan</span>
+          <span class="chip">Daily allowance</span>
+          <span class="chip">Savings pot</span>
           <span class="chip">Indonesian / Rupiah</span>
         </div>
       </div>
@@ -306,39 +318,30 @@
       <div class="shots single">
         <a href="Panther.png" target="_blank" rel="noopener"><img src="Panther.png" alt="PANTH3R music player showcase" width="1920" height="1080"></a>
       </div>
-      <p>A local desktop music player built with pygame-ce. Playlists, favorites and shuffle, a live audio visualizer, accent themes and always-on-top mode — with settings kept in a small local config file. Packaged as a Windows executable with PyInstaller.</p>
+      <a class="store" href="https://github.com/syosdev/PANTH3R" target="_blank" rel="noopener">Available on GitHub</a>
+      <p>A fun little side project: a local music player with playlists, favorites, shuffle, and an always-on-top strip with a live visualizer. Settings stay in a small local config file, and it ships as a Windows executable.</p>
       <div class="chips">
-        <span class="chip">Python / pygame-ce</span>
-        <span class="chip">Windows · open source</span>
-        <span class="chip">NumPy</span>
-        <span class="chip">Mutagen</span>
-        <span class="chip">Pillow</span>
+        <span class="chip">Python / pygame-ce audio</span>
+        <span class="chip">Windows</span>
         <span class="chip">Audio visualizer</span>
         <span class="chip">PyInstaller</span>
       </div>
     </article>
   </section>
 
-  <section id="skills" class="wrap reveal">
-    <div class="eyebrow">What I bring</div>
-    <h2>What I bring</h2>
-    <div class="chips">
-      <span class="chip">AI-assisted development</span>
-      <span class="chip">Qt / Tauri / MSIX</span>
-      <span class="chip">React / Vite</span>
-      <span class="chip">SQLite / Rust</span>
-      <span class="chip">Certification / migrations / backups</span>
-    </div>
-  </section>
-
   <section id="contact" class="contact wrap reveal">
-    <div class="eyebrow">Say hello</div>
-    <h2>Let's work together</h2>
-    <p>Have a project in mind or just want to connect? My inbox is open.</p>
+    <div class="eyebrow">Open to work</div>
+    <h2>Let's build something useful</h2>
+    <p>I'm a desktop app developer open to new roles and collaborations. If you need someone who can ship Windows apps from idea to Store release, email me and let's talk.</p>
     <div class="btns">
-      <a class="btn primary" href="ADD_GITHUB_URL" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn ghost" href="mailto:you@example.com">Email</a>
-      <a class="btn ghost" href="ADD_LINKEDIN_URL" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn primary" href="https://github.com/syosdev" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="mailto:irfansetiawan5055@gmail.com">Email</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/irfan-setiawan-5o550" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="eyebrow">Contact details</div>
+    <div class="contact-info">
+      <p><strong>Phone:</strong> 089510836298</p>
+      <p><strong>Location:</strong> Kalimantan Timur, Balikpapan, Indonesia</p>
     </div>
   </section>
 </main>
